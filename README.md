@@ -1,6 +1,6 @@
 # Old-Stuff
 Just a collection of old stuff I made a long time ago just to learn new stuff and learn some different libraries. For that reason much of the code is only half done.
-## Overview of all the scripts in this repository:
+## Overview of all the scripts in this repository
 ### Todo app
 A simple ToDo app made with tkinter.
 #### Requirements:
@@ -22,7 +22,7 @@ One of the only apps in this collection that is actually useful. Convert euros, 
 tkinter
 BeautifulSoup
 requests
-## Verb Conjugator
+### Verb Conjugator
 A handy little GUI for conjugating regular verbs in Spanish. Works well. Even has a short dictionary for some of the most common irregular verbs so it can conjugate those as well.
 #### Requirements:
 Pygame
