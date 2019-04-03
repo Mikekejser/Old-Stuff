@@ -1,0 +1,119 @@
+import pygame as pg
+import random
+
+
+# COLORS
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RANDOM_COLOR = (190, 40, 150)
+##
+
+# GAME VARIABLES
+FPS = 30
+size = width, height = 800, 600
+window = pg.display.set_mode(size)
+clock = pg.time.Clock()
+pg.mouse.set_visible(0)
+score = 0
+blockActive = True
+score_screen_on = True
+##
+
+def player_object():
+    circle_radius = 50
+    pg.draw.circle(window, BLACK, mouse, circle_radius, 2)
+def block():
+    if blockActive:
+        pg.draw.rect(window, RANDOM_COLOR, box_rect)
+def score_screen():
+    global score
+    global score_screen_on
+    while score_screen_on:
+        text = largeFont.render('Score is:', True, BLACK)
+        text_rect = text.get_rect()
+        text_rect.right = width//2-5
+
+        score_text = largeFont.render(str(score), True, BLACK)
+        score_text_rect = score_text.get_rect()
+        score_text_rect.left = width//2+5
+
+        for e in pg.event.get():
+            if e.type == pg.QUIT:
+                score_screen_on = False
+            elif e.type == pg.KEYDOWN:
+                if e.key == pg.K_q:
+                    score_screen_on = False
+                elif e.key == pg.K_SPACE:
+                    score_screen_on = False
+        window.fill(WHITE)
+        window.blit(text, text_rect)
+        window.blit(score_text, score_text_rect)
+        clock.tick(FPS)
+        pg.display.update()
+
+def gamelopp():
+    global mouse
+    global blockActive
+    global box_rect
+    global score
+    done = False
+    time = 2
+    startTime = False
+    # BLOCK VARIABLES
+    xBlock = 400
+    yBlock = 300
+    block_size = 100
+    while not done:
+        box_rect = pg.Rect(xBlock, yBlock, block_size, block_size)
+
+        mouse = pg.mouse.get_pos()
+
+        # TEXT OBJECTS
+        score_text1 = smallFont.render('Score:', True, BLACK)
+        score_text_rect1 = score_text1.get_rect()
+        score_text_rect1.right = width//2-5
+
+        score_text2 = smallFont.render(str(score), True, BLACK)
+        score_text_rect2 = score_text2.get_rect()
+        score_text_rect2.left = width//2+5
+
+        time_text = smallFont.render(str(round(time, 1)), True, BLACK)
+        time_text_rect = time_text.get_rect()
+        time_text_rect.center = width//2, 570
+        ##
+
+        for e in pg.event.get():
+            if e.type == pg.QUIT:
+                done = True
+            elif e.type == pg.KEYDOWN:
+                if e.key == pg.K_q:
+                    done = True
+            elif e.type == pg.MOUSEBUTTONDOWN:
+                startTime = True
+                if time >= 0.1:
+                    if box_rect.collidepoint(e.pos):
+                        xBlock = random.randint(0, 800 - block_size)
+                        yBlock = random.randint(0, 600 - block_size)
+                        score += 1
+
+        if startTime:
+            time -= 1 / 30
+        if time <= 0:
+            time = 0
+            blockActive = False
+            score_screen()
+
+        window.fill(WHITE)
+        block()
+        window.blit(score_text1, score_text_rect1)
+        window.blit(score_text2, score_text_rect2)
+        window.blit(time_text, time_text_rect)
+        player_object()
+        clock.tick(FPS)
+        pg.display.update()
+pg.init()
+# FONT
+smallFont = pg.font.SysFont('Arial', 25)
+largeFont = pg.font.SysFont('Arial', 45)
+gamelopp()
+pg.quit()
