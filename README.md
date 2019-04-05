@@ -30,4 +30,7 @@ A handy little GUI for conjugating regular verbs in Spanish. Works well. Even ha
 Silly game just to practice using the pygame library.
 #### Requirements:
 - Pygame
-
+### Street Name
+Just for fun
+#### Requirements:
+nothing
