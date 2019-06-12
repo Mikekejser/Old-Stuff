@@ -1,5 +1,4 @@
 # Old-Stuff
-Just a collection of old stuff I made a long time ago just to learn new stuff and learn some different libraries. For that reason much of the code is only half done.
 ## Overview of all the scripts in this repository
 ### Todo app
 A simple ToDo app made with tkinter.
